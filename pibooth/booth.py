@@ -6,7 +6,6 @@
 
 import os
 import os.path as osp
-import tempfile
 import shutil
 import logging
 import argparse
@@ -448,7 +447,7 @@ def main():
     options = parser.parse_args()
 
     if not options.nolog:
-        filename = osp.join(tempfile.gettempdir(), 'pibooth.log')
+        filename = osp.join(osp.expanduser("~"), 'pibooth.log')
     else:
         filename = None
     configure_logging(options.logging, '[ %(levelname)-8s] %(name)-18s: %(message)s', filename=filename)
