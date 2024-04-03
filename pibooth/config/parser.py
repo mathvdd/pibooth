@@ -24,6 +24,10 @@ def values_list_repr(values):
 DEFAULT = odict((
     ("GENERAL",
         odict((
+            ("filename",
+                ("misc",
+                 "String to append to the filename",
+                 None, None)),
             ("language",
                 ("en",
                  "User interface language: {}".format(values_list_repr(language.get_supported_languages())),
