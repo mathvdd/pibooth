@@ -252,7 +252,7 @@ class PiApplication(object):
         """
         if not self.capture_date:
             raise EnvironmentError("The 'capture_date' attribute is not set yet")
-        return "{}_{}.jpg".format(self._config.gettyped('GENERAL', 'filename'), self.capture_date)
+        return "{}_{}.jpg".format(self._config.gettyped('GENERAL', 'event'), self.capture_date)
 
     def find_quit_event(self, events):
         """Return the first found event if found in the list.

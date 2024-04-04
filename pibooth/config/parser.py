@@ -24,7 +24,7 @@ def values_list_repr(values):
 DEFAULT = odict((
     ("GENERAL",
         odict((
-            ("filename",
+            ("event",
                 ("misc",
                  "String to append to the filename",
                  None, None)),

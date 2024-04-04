@@ -105,13 +105,15 @@ class PicturePlugin(object):
         LOGGER.info("Saving raw captures")
         captures = app.camera.get_captures()
 
+        event_name = cfg.gettyped('GENERAL','event')
+
         for savedir in cfg.gettuple('GENERAL', 'directory', 'path'):
-            rawdir = osp.join(savedir, "raw", app.capture_date)
+            rawdir = osp.join(savedir, event_name, "raw", app.capture_date)
             os.makedirs(rawdir)
 
             for capture in captures:
                 count = captures.index(capture)
-                capture.save(osp.join(rawdir, "pibooth{:03}.jpg".format(count)))
+                capture.save(osp.join(rawdir, "{}{:03}.jpg".format(event_name,count)))
 
         LOGGER.info("Creating the final picture")
         default_factory = get_picture_factory(captures, cfg.get('PICTURE', 'orientation'))
@@ -121,7 +123,7 @@ class PicturePlugin(object):
         app.previous_picture = factory.build()
 
         for savedir in cfg.gettuple('GENERAL', 'directory', 'path'):
-            app.previous_picture_file = osp.join(savedir, app.picture_filename)
+            app.previous_picture_file = osp.join(savedir, event_name, app.picture_filename)
             factory.save(app.previous_picture_file)
 
         if cfg.getboolean('WINDOW', 'animate') and app.capture_nbr > 1:
