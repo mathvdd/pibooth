@@ -73,7 +73,7 @@ class iobj():
     def update_remote(self, alldirs=False):
         def nonrecursive(path):
             # return [os.path.join(path, f) for f in os.listdir(path) if (os.path.isfile(f) and f.endswith('.jpg'))]
-            return [f for f in os.listdir(path) if (os.path.isfile(f) and f.endswith('.jpg'))]
+            return [f for f in os.listdir(path) if (os.path.isfile(os.path.join(up_local, f)) and f.endswith('.jpg'))]
 
         if alldirs:
             up_local = self.path_im_local_root
@@ -90,10 +90,10 @@ class iobj():
                 up_dist = os.path.join(self.ftp.ftpcred["path_web_pibooth"], 'im', event)
                 local_list = nonrecursive(up_local)
                 dist_list = self.ftp.ftp_listdir(up_dist)
-                to_up = [f for f in local_list if f not in dist_list]
+                to_up = [f for f in local_list if not f in dist_list]
 
                 for f in to_up:
-                    self.ftp.upload(os.path.join(up_local, f), os.path.join(up_dist, f))
+                    self.ftp.ftp_upload(os.path.join(up_local, f), os.path.join(up_dist, f))
             else:
                 print(f'Did not find local dir {up_local}, skipping sync')
         # local = [os.path.join(up_local, f) for f in os.listdir(up_local) if (os.path.isfile(f) and f.endswith('.jpg') and not '/raw/' in f)]
