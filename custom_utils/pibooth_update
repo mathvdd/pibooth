@@ -1,4 +1,4 @@
 #!/bin/bash
 echo 'updating pibooth from github'
 cd /opt/pibooth
-git pull
+sudo git pull
