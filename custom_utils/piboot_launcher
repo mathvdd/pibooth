@@ -5,7 +5,13 @@ import sys
 import wifi
 import iopb
 import threading
-
+import os
+#check that the USB is Connected
+if not os.path.isdir('/USB/im/'):
+    try:
+        os.mkdir('/USB/im/')
+    except:
+        print('Could not initualize the /USB/im/ dir')
 #connect to wifi
 wifi.main()
 #update config from the server

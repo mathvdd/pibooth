@@ -456,6 +456,8 @@ def main():
 
     # Load the configuration
     config = PiConfigParser(osp.join(options.config_directory, "pibooth.cfg"), plugin_manager, not options.reset)
+    if osp.isdir('/USB/im'):
+        config.set('GENERAL','directory', '/USB/im/')
 
     # Register plugins
     plugin_manager.load_all_plugins(config.gettuple('GENERAL', 'plugins', 'path'),
