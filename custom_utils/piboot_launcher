@@ -2,19 +2,22 @@
 # -*- coding: utf-8 -*-
 import re
 import sys
-sys.path.insert(1, '/opt/pibooth')
-import pibooth
 import wifi
 import iopb
 
-if __name__ == '__main__':
-    #connect to wifi
-    wifi.main()
-    #update config from the server
-    iobj = iopb.iobj()
-    iobj.update_cfg_from_json()
+#connect to wifi
+wifi.main()
+#update config from the server
+iobj = iopb.iobj()
+iobj.update_cfg_from_json()
+iobj.ftp.ftp_disconnect() #close it because will be reopen as anotehr instance in the sync
 
-    print(pibooth.__path__)
-    from pibooth.booth import main
-    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
-    sys.exit(main())
+#start sync script
+
+#load pibooth
+sys.path.insert(1, '/opt/pibooth')
+import pibooth
+print('pibooth loaded from', pibooth.__path__)
+from pibooth.booth import main
+sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+sys.exit(main())

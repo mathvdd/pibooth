@@ -80,7 +80,6 @@ class ftp():
 
 if __name__=='__main__':
     ftp = ftp()
-    ftp.path_ftpcred = '.ftpcred.json'
     ftp.ftp_connection()
     dirs=ftp.ftp_listdir('www/pibooth')
     print(dirs)

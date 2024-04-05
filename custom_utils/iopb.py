@@ -42,7 +42,7 @@ class iobj():
             with open(self.path_cfg_web) as json_file:
                 self.cfg_fromjson = jsonload(json_file)
 
-            print(f'Setting envent to {get_event_folder()}')
+            print(f'Setting envent to {self.get_event_folder()}')
 
             with open(self.path_cfg_local,'r') as f:
                 get_all=f.readlines()
@@ -68,25 +68,6 @@ class iobj():
         else:
             return self.cfg_fromjson['event']
 
-
-
-    # def move_file(self, files, move_dist=True):
-    #
-    #     if not os.path.isdir(self.path_pic_local_dir):
-    #         os.mkdir(self.path_pic_local_dir)
-    #     for file in files:
-    #         #need to rename
-    #         path = os.path.join(self.path_pic_tmp, file)
-    #         dest = os.path.join(self.path_pic_local_dir, file)
-    #         print(f'Moving {path} to {dest}')
-    #         shutil.move(path, dest)
-    #         #also move the raw file
-    #
-    #         #send to server
-    #         if move_dist and self.connection is not None:
-    #             dist_dir = os.path.join(self.path_pic_dist_root, self.pic_local_dirname)
-    #             dist = os.path.join(dist_dir, file)
-    #             self.ftp_upload(dest, dist)
 
     def update_remote(self, alldirs=False):
         def nonrecursive(path):
@@ -129,10 +110,5 @@ class iobj():
 
 
 if __name__=='__main__':
-    wp = pibooth_wrapper()
-    input(wp.check_internet())
-    wp.ftp_connection()
-    wp.ftp_download(wp.path_cfg_web_dist, wp.path_cfg_web_local)
-    wp.update_cfg_from_json()
-    wp.auto_sync()
-    wp.ftp_disconnect()
+    iobj = iobj()
+    iobj.auto_sync()
