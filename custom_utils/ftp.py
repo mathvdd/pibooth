@@ -39,7 +39,6 @@ class ftp():
     def ftp_listdir(self, remote_path):
         if self.try_connected():
             try:
-                print(remote_path)
                 self.connection.stat(remote_path)  # Test if remote_path exists
                 dirs = self.connection.listdir(remote_path)
 
@@ -57,7 +56,7 @@ class ftp():
                 self.connection.get(dist, local)
                 print(f"Downloaded {dist} to {local}")
             except:
-                print(f"Could not downloaded {dist} to {local}")
+                print(f"Could not download {dist} to {local}")
 
     def ftp_upload(self, local, dist):
         if self.try_connected():

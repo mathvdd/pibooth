@@ -12,6 +12,7 @@ class iobj():
     def __init__(self, ftp_on=True):
 
         self.path_cfg_local = os.path.join(os.path.expanduser('~'), '.config/pibooth/pibooth.cfg')
+        self.path_cfg_web = os.path.join(os.path.expanduser('~'), '.config/pibooth/conf_web.json')
         self.cfg_fromjson = None
 
         if os.path.isdir('/USB/im'):
@@ -26,7 +27,9 @@ class iobj():
 
     def fetch_cfg_from_web(self):
         try:
-            self.ftp.ftp_download(os.path.join(self.ftp.ftpcred["path_web_pibooth"], 'admin/conf_web.json'), 'conf_web.json')
+            self.ftp.ftp_download(os.path.join(self.ftp.ftpcred["path_web_pibooth"],
+                                                'admin/conf_web.json'),
+                                self.path_cfg_web)
             print('Fichier de configuration téléchargé depuis le web')
         except:
             print('Echec de téléchargement du fichier de configuration')
@@ -35,9 +38,11 @@ class iobj():
         self.fetch_cfg_from_web()
         print('Updating config from json file')
         #open local file
-        if os.path.isfile('conf_web.json'):
-            with open('conf_web.json') as json_file:
+        if os.path.isfile(self.path_cfg_web):
+            with open(self.path_cfg_web) as json_file:
                 self.cfg_fromjson = jsonload(json_file)
+
+            print(f'Setting envent to {get_event_folder()}')
 
             with open(self.path_cfg_local,'r') as f:
                 get_all=f.readlines()
@@ -50,16 +55,18 @@ class iobj():
                     else:
                         f.writelines(line)
         else:
-            print('Could not find conf_web.json')
+            print('Could not find conf_web.json (from update cfg function)')
 
     def get_event_folder(self):
         if self.cfg_fromjson is None:
-            if os.path.isfile('conf_web.json'):
-                with open('conf_web.json') as json_file:
+            if os.path.isfile(self.path_cfg_web):
+                with open(self.path_cfg_web) as json_file:
                     self.cfg_fromjson = jsonload(json_file)
+                    return self.cfg_fromjson['event']
             else:
-                print('Could not find conf_web.json')
-        return self.cfg_fromjson['event']
+                print('Could not find conf_web.json (from get event function)')
+        else:
+            return self.cfg_fromjson['event']
 
 
 
