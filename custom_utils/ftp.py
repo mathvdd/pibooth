@@ -75,7 +75,7 @@ class ftp():
                 print(f"Could not upload {local} to {dist}")
 
     def ftp_cred(self):
-        with open('.ftpcred.json') as json_file:
+        with open('/opt/pibooth/custom_utils/.ftpcred.json') as json_file:
             self.ftpcred = jsonload(json_file)
 
 if __name__=='__main__':
