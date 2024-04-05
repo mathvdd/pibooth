@@ -4,15 +4,18 @@ import re
 import sys
 import wifi
 import iopb
+import threading
 
 #connect to wifi
 wifi.main()
 #update config from the server
 iobj = iopb.iobj()
 iobj.update_cfg_from_json()
-iobj.ftp.ftp_disconnect() #close it because will be reopen as anotehr instance in the sync
+# iobj.ftp.ftp_disconnect() #close it because will be reopen as anotehr instance in the sync
 
 #start sync script
+t1=threading.Thread(target=iobj.auto_sync, daemon=True)
+t1.start()
 
 #load pibooth
 sys.path.insert(1, '/opt/pibooth')
