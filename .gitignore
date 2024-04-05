@@ -1,3 +1,12 @@
+#www
+www/
+
+.htaccess
+.htpasswd
+.ftpcred*
+ftpcred*
+custom_utils/readme.md
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -23,7 +32,7 @@ var/
 .installed.cfg
 *.egg
 
-#IDE 
+#IDE
 .idea
 .project
 .pydevproject
@@ -74,4 +83,3 @@ target/
 
 # pyenv
 .python-version
-
