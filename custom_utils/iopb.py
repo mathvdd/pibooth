@@ -2,7 +2,7 @@ import os
 import urllib.request
 import shutil
 from json import load as jsonload
-from time import sleep as sleep
+import time
 from base64 import b64decode as dec
 from urllib import request
 import ftp
@@ -97,9 +97,11 @@ class iobj():
 
     def auto_sync(self):
         print(f'Listening and waiting for new pictures')
+        tnow = time.time()
         while True:
-            self.update_remote()
-            sleep(1)
+            if (time.time() -tnow )>1:
+                self.update_remote()
+                tnow = time.time()
 
     def check_internet(self):
         try:
