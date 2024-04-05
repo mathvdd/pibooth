@@ -18,6 +18,7 @@ class iobj():
         if os.path.isdir('/USB/im'):
             self.path_im_local_root = '/USB/im/'
         else:
+            print('Could not find local image root /USB/im/')
             self.path_im_local_root = os.path.join(os.path.expanduser('~'), 'Pictures/pibooth/')
 
         if ftp_on:
