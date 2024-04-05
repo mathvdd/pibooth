@@ -11,24 +11,24 @@ class iobj():
 
     def __init__(self, ftp_on=True):
 
-        self.path_cfg_local = os.path.join(os.expanduser('~'), '.config/pibooth/pibooth.cfg')
+        self.path_cfg_local = os.path.join(os.path.expanduser('~'), '.config/pibooth/pibooth.cfg')
         self.cfg_fromjson = None
 
         if os.path.isdir('/USB/im'):
             self.path_im_local_root = '/USB/im/'
         else:
-            self.path_im_local_root = os.path.join(os.expanduser('~'), 'Pictures/pibooth/')
+            self.path_im_local_root = os.path.join(os.path.expanduser('~'), 'Pictures/pibooth/')
 
         if ftp_on:
             self.ftp = ftp.ftp()
-            self.ftp.connection()
+            self.ftp.ftp_connection()
 
 
     def fetch_cfg_from_web(self):
         try:
             self.ftp.ftp_download(os.path.join(self.ftp.ftpcred["path_web_pibooth"], 'admin/conf_web.json'), 'conf_web.json')
             print('Fichier de configuration téléchargé depuis le web')
-        else:
+        except:
             print('Echec de téléchargement du fichier de configuration')
 
     def update_cfg_from_json(self):
@@ -100,7 +100,7 @@ class iobj():
             up_dist = os.path.join(self.ftp.ftpcred["path_web_pibooth"], 'im', event)
             local_list = nonrecursive(up_local)
             dist_list = self.ftp.ftp_listdir(up_dist)
-            to_up = [f for f in local_list if not in dist_list]
+            to_up = [f for f in local_list if f not in dist_list]
 
             for f in to_up:
                 self.ftp.upload(os.path.join(up_local, f), os.path.join(up_dist, f))

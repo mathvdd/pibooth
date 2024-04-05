@@ -1,5 +1,6 @@
 import pysftp
 from json import load as jsonload
+import os
 
 class ftp():
 
@@ -38,13 +39,14 @@ class ftp():
     def ftp_listdir(self, remote_path):
         if self.try_connected():
             try:
-                self.connection.chdir(os.path.split(dist)[0])  # Test if remote_path exists
+                print(remote_path)
+                self.connection.stat(remote_path)  # Test if remote_path exists
                 dirs = self.connection.listdir(remote_path)
 
             except IOError:
                 print(f'Could not check content of {remote_path} because it does not exists')
                 dirs = []
-                
+
             return dirs
 
     def ftp_download(self,dist,local):
@@ -62,7 +64,7 @@ class ftp():
             try:
                 #first check if the folder exists
                 try:
-                    self.connection.chdir(os.path.split(dist)[0])  # Test if remote_path exists
+                    self.connection.stat(os.path.split(dist)[0])  # Test if remote_path exists
                 except IOError:
                     self.connection.mkdir(os.path.split(dist)[0])  # Create remote_path
 
@@ -74,12 +76,13 @@ class ftp():
                 print(f"Could not upload {local} to {dist}")
 
     def ftp_cred(self):
-        with open(self.path_ftpcred) as json_file:
+        with open('.ftpcred.json') as json_file:
             self.ftpcred = jsonload(json_file)
 
 if __name__=='__main__':
     ftp = ftp()
     ftp.path_ftpcred = '.ftpcred.json'
     ftp.ftp_connection()
-    ftp.ftp_listdir('www/pibooth')
+    dirs=ftp.ftp_listdir('www/pibooth')
+    print(dirs)
     ftp.ftp_disconnect()

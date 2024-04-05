@@ -5,13 +5,13 @@ import sys
 sys.path.insert(1, '/opt/pibooth')
 import pibooth
 import wifi
-import io
+import iopb
 
 if __name__ == '__main__':
     #connect to wifi
     wifi.main()
     #update config from the server
-    iobj = io.iobj()
+    iobj = iopb.iobj()
     iobj.update_cfg_from_json()
 
     print(pibooth.__path__)
