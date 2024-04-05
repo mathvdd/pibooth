@@ -76,14 +76,14 @@ class iobj():
 
         if alldirs:
             up_local = self.path_im_local_root
-            up_dist = os.path.join(ftp.ftpcred["path_web_pibooth"], 'im')
+            up_dist = os.path.join(self.ftp.ftpcred["path_web_pibooth"], 'im')
             local_list = []
             folders = [os.path.join(path, f) for f in os.listdir(path) if os.path.isdir(f)]
             for folder in folders:
                 local_list.append(nonrecursive(folder))
             #to finish
         else:
-            event = get_event_folder()
+            event = self.get_event_folder()
             up_local = os.path.join(self.path_im_local_root, event)
             up_dist = os.path.join(self.ftp.ftpcred["path_web_pibooth"], 'im', event)
             local_list = nonrecursive(up_local)
@@ -98,7 +98,7 @@ class iobj():
     def auto_sync(self):
         print(f'Listening and waiting for new pictures')
         while True:
-            update_remote()
+            self.update_remote()
             sleep(1)
 
     def check_internet(self):
