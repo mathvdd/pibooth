@@ -173,6 +173,8 @@ class ViewPlugin(object):
         if cfg.getfloat('WINDOW', 'finish_picture_delay') > 0 and not self.forgotten:
             win.show_finished(app.previous_picture)
             timeout = cfg.getfloat('WINDOW', 'finish_picture_delay')
+        elif cfg.getfloat('WINDOW', 'finish_picture_delay') == -1 and not self.forgotten:
+            pass
         else:
             win.show_finished()
             timeout = 1
