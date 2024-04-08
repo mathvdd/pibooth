@@ -102,7 +102,7 @@ class iobj():
         print(f'Listening and waiting for new pictures')
         tnow = time.time()
         while True:
-            if (time.time() -tnow )>1:
+            if (time.time() -tnow )>3:
                 self.update_remote()
                 tnow = time.time()
 
