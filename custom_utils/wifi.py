@@ -105,7 +105,7 @@ def write_wpa(ssid, pwd):
 		f.writelines(out_lines)
 
 
-def main_wait(waitforinput = False):
+def main(waitforinput = False):
 
 	while True:
 
