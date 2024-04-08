@@ -1,0 +1,7 @@
+#!/bin/bash
+chmod u+s /usr/sbin/iwlist
+chmod o+wr /etc/wpa_supplicant/wpa_supplicant.conf
+chmod u+s /opt/pibooth/custom_utils/pibooth_update
+chmod +x /opt/pibooth/custom_utils/pibooth_update
+chmod o+x /opt/pibooth/custom_utils/wifi
+chmod o+x /opt/pibooth/custom_utils/pibooth_launcher
