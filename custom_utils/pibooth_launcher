@@ -6,6 +6,10 @@ import wifi
 import iopb
 import threading
 import os
+#check if need to updated
+if os.path.isfile('/opt/pibooth/custom_utils/update'):
+    os.system('cd /opt/pibooth/ && git pull')
+
 #check that the USB is Connected
 if not os.path.isdir('/USB/im/'):
     try:
