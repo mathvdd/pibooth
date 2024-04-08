@@ -105,8 +105,8 @@ def write_wpa(ssid, pwd):
 		f.writelines(out_lines)
 
 
-def main():
-	waitforinput = True
+def main_wait(waitforinput = False):
+
 	while True:
 
 		#first check the connection
@@ -144,6 +144,7 @@ def main():
 			break
 		else:
 			print('wrong input')
+
 
 if __name__=='__main__':
 	main()

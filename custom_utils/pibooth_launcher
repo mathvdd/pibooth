@@ -12,12 +12,14 @@ if not os.path.isdir('/USB/im/'):
         os.mkdir('/USB/im/')
     except:
         print('Could not initualize the /USB/im/ dir')
-#connect to wifi
-wifi.main()
+# #connect to wifi
+# wifi.main()
+#check the wifi
+local, internet = wifi.check_connection()
+
 #update config from the server
 iobj = iopb.iobj()
 iobj.update_cfg_from_json()
-# iobj.ftp.ftp_disconnect() #close it because will be reopen as anotehr instance in the sync
 
 #start sync script
 t1=threading.Thread(target=iobj.auto_sync, daemon=True)
