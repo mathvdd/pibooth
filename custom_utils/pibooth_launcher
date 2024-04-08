@@ -8,6 +8,7 @@ import threading
 import os
 #check if need to updated
 if os.path.isfile('/opt/pibooth/custom_utils/update'):
+    os.system('mv /opt/pibooth/custom_utils/update /opt/pibooth/custom_utils/noupdate')
     os.system('cd /opt/pibooth/ && git pull')
 
 #check that the USB is Connected

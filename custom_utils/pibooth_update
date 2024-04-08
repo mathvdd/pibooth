@@ -1,4 +1,4 @@
 #!/bin/bash
 echo 'updating pibooth from github'
-echo 'yes' >> /opt/pibooth/custom_ustils/update
+mv /opt/pibooth/custom_ustils/noupdate /opt/pibooth/custom_ustils/update
 reboot
