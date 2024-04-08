@@ -6,10 +6,6 @@ import wifi
 import iopb
 import threading
 import os
-#check if need to updated
-if os.path.isfile('/opt/pibooth/custom_utils/update'):
-    os.system('mv /opt/pibooth/custom_utils/update /opt/pibooth/custom_utils/noupdate')
-    os.system('cd /opt/pibooth/ && git pull')
 
 #check that the USB is Connected
 if not os.path.isdir('/USB/im/'):
@@ -21,6 +17,16 @@ if not os.path.isdir('/USB/im/'):
 # wifi.main()
 #check the wifi
 local, internet = wifi.check_connection()
+
+#check if need to updated
+if internet:
+    with open('/opt/pibooth/custom_utils/update', 'r') as f:
+        first_line = f.readline().rstrip('\n')
+    if first_line == 'yes':
+        with open('/opt/pibooth/custom_utils/update', 'w') as f:
+            f.writeline('no\n')
+        print('Trying a git update')
+        os.system('cd /opt/pibooth/ && git pull')
 
 #update config from the server
 iobj = iopb.iobj()
