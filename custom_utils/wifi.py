@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from subprocess import check_output
 import pandas as pd
 import time
@@ -17,10 +15,10 @@ def check_connection(retry = 5):
 		except:
 			local = None
 			internet = False
-		
+
 		trys += 1
 		time.sleep(1)
-		
+
 		#if locally connected, check if conneced to the internet
 		if local is not None:
 			try:
@@ -29,7 +27,7 @@ def check_connection(retry = 5):
 				break
 			except:
 				internet = False
-	
+
 	if local is not None:
 		print(f'found local ip address: {local}')
 	else:
@@ -38,9 +36,9 @@ def check_connection(retry = 5):
 		print('Internet connected')
 	else:
 		print('No internet connection')
-	
+
 	return (local, internet)
-			
+
 
 def scan(retry = 10):
 	trys = 1 #sometimes need to retry multiple times to have an output
@@ -60,7 +58,7 @@ def scan(retry = 10):
 			if line.startswith("ESSID"):
 				entry['ssid']  = line.split('"')[1]
 				found_ssid = found_ssid.append(entry, ignore_index=True, sort = False)
-		
+
 		if len(found_ssid) > 0:
 			break
 		else:
@@ -74,10 +72,10 @@ def write_wpa(ssid, pwd):
 	isin = False
 	#wpaconf = '/home/math/Desktop/wpa_supplicant.conf'
 	wpaconf = '/etc/wpa_supplicant/wpa_supplicant.conf'
-	
+
 	with open(wpaconf, 'r') as f:
 		in_lines = f.readlines()
-	
+
 	out_lines = []
 	for idx, line in enumerate(in_lines):
 		if line.strip().startswith("ssid"):
@@ -102,20 +100,20 @@ def write_wpa(ssid, pwd):
 		out_lines.append('key_mgmt=WPA-PSK\n')
 		out_lines.append('}\n')
 		print(f'Add {ssid} to wpa file')
-		
+
 	with open(wpaconf, 'w') as f:
 		f.writelines(out_lines)
-	
-	
+
+
 def main():
 	waitforinput = True
 	while True:
-	
+
 		#first check the connection
 		local, internet = check_connection()
 		if internet:
-			break	
-			
+			break
+
 		if waitforinput:
 			try:
 				mess = 'Appuyer sur enter dans les 10 secondes pour choisir un réseau'
@@ -123,12 +121,12 @@ def main():
 			except:
 				break
 		waitforinput = False
-		
+
 		#if no connection scan the networks
 		scanr = scan()
 		print(scanr)
-		
-		
+
+
 		print("Sélectionner le numéro du réseau à ajouter")
 		print("ou 'q' pour quitter, 's' pour rescanner")
 		inp = input("réseau :")
@@ -146,6 +144,6 @@ def main():
 			break
 		else:
 			print('wrong input')
-		
+
 if __name__=='__main__':
 	main()
