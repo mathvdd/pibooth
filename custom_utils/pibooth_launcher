@@ -22,6 +22,7 @@ local, internet = wifi.check_connection()
 if internet:
     with open('/opt/pibooth/custom_utils/update', 'r') as f:
         first_line = f.readline().rstrip('\n')
+        print('Asking for update')
     if first_line == 'yes':
         with open('/opt/pibooth/custom_utils/update', 'w') as f:
             f.write('no\n')
