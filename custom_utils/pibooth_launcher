@@ -6,8 +6,16 @@ import wifi
 import iopb
 import threading
 import os
-
+from time import sleep
 #check that the USB is Connected
+if not os.path.ismount('/USB'):
+    print('USB not mounted, trying to mount it')
+    os.system('mount /USB')
+    sleep(2)
+    if not os.path.ismount('/USB'):
+        print('mount unsuccessful, suggesting a reboot or checking the USB')
+else:
+    print('/USB mounted')
 if not os.path.isdir('/USB/im/'):
     try:
         os.mkdir('/USB/im/')

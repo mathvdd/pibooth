@@ -8,12 +8,13 @@ chmod o+x /opt/pibooth/custom_utils/pibooth_launcher
 chmod o+rw /opt/pibooth/custom_utils/update
 
 mkdir /opt/pibooth/bin
-sudo ln -s /usr/bin/hostname /opt/pibooth/bin/hostname
-sudo ln -s /usr/sbin/reboot /opt/pibooth/bin/reboot
-sudo ln -s /usr/bin/su /opt/pibooth/bin/su
-sudo ln -s /usr/bin/vcgencmd /opt/pibooth/bin/vcgencmd
-sudo ln -s /usr/sbin/iwlist /opt/pibooth/bin/iwlist
-sudo ln -s /usr/sbin/wpa_cli /opt/pibooth/bin/wpa_cli
-sudo ln -s /opt/pibooth/custom_utils/wifi /opt/pibooth/bin/wifi
-sudo ln -s /opt/pibooth/custom_utils/pibooth_launcher /opt/pibooth/bin/start
-sudo ln -s /opt/pibooth/custom_utils/pibooth_update /opt/pibooth/bin/update
+ln -s /usr/bin/hostname /opt/pibooth/bin/hostname
+ln -s /usr/sbin/reboot /opt/pibooth/bin/reboot
+ln -s /usr/bin/su /opt/pibooth/bin/su
+ln -s /usr/bin/vcgencmd /opt/pibooth/bin/vcgencmd
+ln -s /usr/sbin/iwlist /opt/pibooth/bin/iwlist
+ln -s /usr/sbin/wpa_cli /opt/pibooth/bin/wpa_cli
+ln -s /opt/pibooth/custom_utils/wifi /opt/pibooth/bin/wifi
+ln -s /opt/pibooth/custom_utils/pibooth_launcher /opt/pibooth/bin/start
+ln -s /opt/pibooth/custom_utils/pibooth_update /opt/pibooth/bin/update
+ln -s /usr/bin/mount /opt/bin/mount
