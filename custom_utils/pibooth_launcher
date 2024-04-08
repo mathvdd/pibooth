@@ -27,7 +27,7 @@ if internet:
         with open('/opt/pibooth/custom_utils/update', 'w') as f:
             f.write('no\n')
         print('Trying a git update')
-        os.system('git --git-dir=/opt/pibooth/.git')
+        os.system('git -C /opt/pibooth')
 
 #update config from the server
 iobj = iopb.iobj()
