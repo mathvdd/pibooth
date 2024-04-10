@@ -25,12 +25,12 @@ pip install pysftp
 
 mkdir /USB
 
-adduser boothr --shell /usr/bin/bashr
+adduser boothr --shell /usr/bin/rbash
 adduser boothr video
 adduser boothr gpio
 adduser boothr input
 
-echo -e "/n" >> /home/boothr/.bashrc
+echo "" >> /home/boothr/.bashrc
 echo "PATH='/home/boothr/bin/'" >> /home/boothr/.bashrc
 echo "echo '|---------------------|'" >> /home/boothr/.bashrc
 echo "echo '| LISTE DES COMMANDES |'" >> /home/boothr/.bashrc
