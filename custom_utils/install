@@ -19,9 +19,9 @@ ln -s /opt/pibooth/custom_utils/pibooth_launcher /opt/pibooth/bin/start
 ln -s /opt/pibooth/custom_utils/pibooth_update /opt/pibooth/bin/update
 ln -s /usr/bin/mount /opt/bin/mount
 
-apt install -y python3-pandas
-pip install -y inputimeout #optional
-pip install -y pysftp
+apt install python3-pandas
+pip install inputimeout #optional
+pip install pysftp
 
 mkdir /USB
 
