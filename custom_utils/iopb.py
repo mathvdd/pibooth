@@ -28,6 +28,8 @@ class iobj():
 
     def fetch_cfg_from_web(self):
         try:
+            print(os.path.join(self.ftp.ftpcred["path_web_pibooth"],
+                                    f'admin/conf_web_{self.ftp.ftpcred["boothname"]}.json'))
             self.ftp.ftp_download(os.path.join(self.ftp.ftpcred["path_web_pibooth"],
                                     f'admin/conf_web_{self.ftp.ftpcred["boothname"]}.json'),
                                 self.path_cfg_web)

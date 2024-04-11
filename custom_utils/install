@@ -44,12 +44,12 @@ echo '}' >> /opt/pibooth/custom_utils/.ftpcred.json
 
 echo 'install pibooth and depedencies'
 apt install libsdl2-*
-get install python3-opencv
+apt install python3-opencv
 pip3 install pibooth
 
 echo 'download python depedencies'
 apt install python3-pandas
-pip install inputimeout #optional
+#pip install inputimeout #optional
 pip install pysftp
 
 echo 'USB stuff'
@@ -59,6 +59,8 @@ echo 'write USB SSID to copy it into fstab'
 read -p "Press enter to continue"
 echo '#USB config' >> /etc/fstab
 echo 'UUID=UUID_HERE /USB vfat defaults,noexec,rw,user,umask=0000 0 0' >> /etc/fstab
+nano /etc/fstab
+
 mount /USB
 mkdir /USB/im
 
@@ -81,15 +83,16 @@ echo "echo '|---------------------|'" >> /home/boothr/.bashrc
 echo "start &" >> /home/boothr/.bashrc
 
 echo 'sftp setup, no need to login, just accept to trust'
-su boothr -c 'sftp ${ftpuser}@${ftphost}'
+su boothr -c 'sftp -o StrictHostKeyChecking=no ${ftpuser}@${ftphost}'
 
 chmod -w /home/boothr/.bashrc
 chmod -w /home/boothr/.profile
 usermod --shell /usr/bin/rbash boothr
 
-echo 'change autologin user'
+echo 'Activate camera and autologin on clui in sudo raspi-config'
+echo 'DO NOT REBOOT'
+read -p "Press enter to continue"
+raspi-config
+echo 'change autologin user to boothr'
 read -p "Press enter to continue"
 nano /etc/systemd/system/getty@tty1.service.d/autologin.conf
-read -p "Press enter to continue"
-echo 'Activate camera and autologin on gui in sudo raspi-config'
-raspi-config
