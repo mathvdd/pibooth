@@ -1,4 +1,14 @@
-#!/bin/bash
-echo 'updating pibooth from github'
-echo 'yes' > /opt/pibooth/custom_utils/update
-reboot
+#!/usr/bin/python3
+
+####!/bin/bash
+#echo 'updating pibooth from github'
+# echo 'yes' > /opt/pibooth/custom_utils/update
+# reboot
+
+# import iopdb
+#
+# print('Update configuration from website')
+
+print('Oups le script est vide...')
+print("La commande 'start' fera automatiquement une update de la configuration depuis le serveur ftp")
+print("update depuis le git pas encore implémentée")
