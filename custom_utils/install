@@ -25,7 +25,7 @@ ln -s /opt/pibooth/custom_utils/wifi /opt/pibooth/bin/wifi
 ln -s /opt/pibooth/custom_utils/pibooth_launcher /opt/pibooth/bin/start
 ln -s /opt/pibooth/custom_utils/pibooth_update /opt/pibooth/bin/update
 ln -s /opt/pibooth/custom_utils/fancontrol /opt/pibooth/bin/fancontrol
-ln -s /usr/bin/mount /opt/bin/mount
+ln -s /usr/bin/mount /opt/pibooth/bin/mount
 
 echo 'make ftp id file'
 read -p 'ftp host: ' ftphost
