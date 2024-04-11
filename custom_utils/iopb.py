@@ -29,7 +29,7 @@ class iobj():
     def fetch_cfg_from_web(self):
         try:
             self.ftp.ftp_download(os.path.join(self.ftp.ftpcred["path_web_pibooth"],
-                                                'admin/conf_web.json'),
+                                    f'admin/conf_web_{self.ftp.ftpcred["boothname"]}.json'),
                                 self.path_cfg_web)
             print('Fichier de configuration téléchargé depuis le web')
         except:

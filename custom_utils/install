@@ -1,34 +1,19 @@
 #!/bin/bash
+echo 'update and upgrade'
+apt update
+apt upgrade
+
+echo 'set executable authorisations'
 chmod u+s /usr/sbin/iwlist
 chmod o+wr /etc/wpa_supplicant/wpa_supplicant.conf
 chmod u+s /opt/pibooth/custom_utils/pibooth_update
 chmod +x /opt/pibooth/custom_utils/pibooth_update
 chmod o+x /opt/pibooth/custom_utils/wifi
 chmod o+x /opt/pibooth/custom_utils/pibooth_launcher
+chmod o+x /opt/pibooth/custom_utils/fancontrol
 chmod o+rw /opt/pibooth/custom_utils/update
 
-apt install python3-pandas
-pip install inputimeout #optional
-pip install pysftp
-
-mkdir /USB
-
-adduser boothr --shell /usr/bin/rbash
-adduser boothr video
-adduser boothr gpio
-adduser boothr input
-
-echo "" >> /home/boothr/.bashrc
-echo "PATH='/home/boothr/bin/'" >> /home/boothr/.bashrc
-echo "echo '|---------------------|'" >> /home/boothr/.bashrc
-echo "echo '| LISTE DES COMMANDES |'" >> /home/boothr/.bashrc
-echo "echo '|---------------------|'" >> /home/boothr/.bashrc
-echo "echo '| wifi                |'" >> /home/boothr/.bashrc
-echo "echo '| start               |'" >> /home/boothr/.bashrc
-echo "echo '| update              |'" >> /home/boothr/.bashrc
-echo "echo '|---------------------|'" >> /home/boothr/.bashrc
-echo "start" >> /home/boothr/.bashrc
-
+echo 'set bin folder'
 mkdir /opt/pibooth/bin
 ln -s /usr/bin/hostname /opt/pibooth/bin/hostname
 ln -s /usr/sbin/reboot /opt/pibooth/bin/reboot
@@ -39,11 +24,72 @@ ln -s /usr/sbin/wpa_cli /opt/pibooth/bin/wpa_cli
 ln -s /opt/pibooth/custom_utils/wifi /opt/pibooth/bin/wifi
 ln -s /opt/pibooth/custom_utils/pibooth_launcher /opt/pibooth/bin/start
 ln -s /opt/pibooth/custom_utils/pibooth_update /opt/pibooth/bin/update
+ln -s /opt/pibooth/custom_utils/fancontrol /opt/pibooth/bin/fancontrol
 ln -s /usr/bin/mount /opt/bin/mount
+
+echo 'make ftp id file'
+read -p 'ftp host: ' ftphost
+read -p 'ftp user: ' ftpuser
+read -p 'ftp pwd: ' ftppwd
+read -p 'ftp dist folder: ' ftpdist
+read -p 'photobooth name: ' boothname
+
+echo '{' >> /opt/pibooth/custom_utils/.ftpcred.json
+echo \"host\":\"$ftphost\", >> /opt/pibooth/custom_utils/.ftpcred.json
+echo \"user\":\"$ftpuser\", >> /opt/pibooth/custom_utils/.ftpcred.json
+echo \"pwd\":\"$ftppwd\", >> /opt/pibooth/custom_utils/.ftpcred.json
+echo \"dist\":\"$ftpdist\", >> /opt/pibooth/custom_utils/.ftpcred.json
+echo \"boothname\":\"$boothname\" >> /opt/pibooth/custom_utils/.ftpcred.json
+echo '}' >> /opt/pibooth/custom_utils/.ftpcred.json
+
+echo 'install pibooth and depedencies'
+apt install libsdl2-*
+get install python3-opencv
+pip3 install pibooth
+
+echo 'download python depedencies'
+apt install python3-pandas
+pip install inputimeout #optional
+pip install pysftp
+
+echo 'USB stuff'
+mkdir /USB
+blkid
+echo 'write USB SSID to copy it into fstab'
+read -p "Press enter to continue"
+echo '#USB config' >> /etc/fstab
+echo 'UUID=UUID_HERE /USB vfat defaults,noexec,rw,user,umask=0000 0 0' >> /etc/fstab
+mount /USB
+mkdir /USB/im
+
+echo 'Initiate the boothr user'
+adduser boothr --shell /usr/bin/rbash
+adduser boothr video
+adduser boothr gpio
+adduser boothr input
+
+echo "" >> /home/boothr/.bashrc
+echo "PATH='/opt/pibooth/bin/'" >> /home/boothr/.bashrc
+echo "fancontrol &" >> /home/boothr/.bashrc
+echo "echo '|---------------------|'" >> /home/boothr/.bashrc
+echo "echo '| LISTE DES COMMANDES |'" >> /home/boothr/.bashrc
+echo "echo '|---------------------|'" >> /home/boothr/.bashrc
+echo "echo '| wifi                |'" >> /home/boothr/.bashrc
+echo "echo '| start               |'" >> /home/boothr/.bashrc
+echo "echo '| update              |'" >> /home/boothr/.bashrc
+echo "echo '|---------------------|'" >> /home/boothr/.bashrc
+echo "start &" >> /home/boothr/.bashrc
+
+echo 'sftp setup, no need to login, just accept to trust'
+su boothr -c 'sftp ${ftpuser}@${ftphost}'
 
 chmod -w /home/boothr/.bashrc
 chmod -w /home/boothr/.profile
+usermod --shell /usr/bin/rbash boothr
 
-
-
+echo 'change autologin user'
+read -p "Press enter to continue"
+nano /etc/systemd/system/getty@tty1.service.d/autologin.conf
+read -p "Press enter to continue"
 echo 'Activate camera and autologin on gui in sudo raspi-config'
+raspi-config
