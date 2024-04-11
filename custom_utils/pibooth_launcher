@@ -26,16 +26,16 @@ if not os.path.isdir('/USB/im/'):
 #check the wifi
 local, internet = wifi.check_connection()
 
-#check if need to updated
-if internet:
-    with open('/opt/pibooth/custom_utils/update', 'r') as f:
-        first_line = f.readline().rstrip('\n')
-        print(first_line, 'update')
-    if first_line == 'yes':
-        with open('/opt/pibooth/custom_utils/update', 'w') as f:
-            f.write('no\n')
-        print('Trying a git update')
-        os.system('git -C /opt/pibooth pull')
+# #check if need to updated
+# if internet:
+#     with open('/opt/pibooth/custom_utils/update', 'r') as f:
+#         first_line = f.readline().rstrip('\n')
+#         print(first_line, 'update')
+#     if first_line == 'yes':
+#         with open('/opt/pibooth/custom_utils/update', 'w') as f:
+#             f.write('no\n')
+#         print('Trying a git update')
+#         os.system('git -C /opt/pibooth pull')
 
 #update config from the server
 iobj = iopb.iobj()
