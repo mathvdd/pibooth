@@ -84,6 +84,7 @@ echo "start &" >> /home/boothr/.bashrc
 
 echo 'sftp setup, no need to login, just accept to trust'
 su boothr -c 'sftp -o StrictHostKeyChecking=no ${ftpuser}@${ftphost}'
+echo if do not work, run su boothr -c 'sftp -o StrictHostKeyChecking=no ${ftpuser}@${ftphost}'
 
 chmod -w /home/boothr/.bashrc
 chmod -w /home/boothr/.profile
@@ -96,3 +97,4 @@ raspi-config
 echo 'change autologin user to boothr'
 read -p "Press enter to continue"
 nano /etc/systemd/system/getty@tty1.service.d/autologin.conf
+echo 'peut redémarrer maintenant'

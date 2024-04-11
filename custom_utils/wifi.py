@@ -2,8 +2,12 @@ from subprocess import check_output
 import pandas as pd
 import time
 from urllib import request
-from inputimeout import inputimeout
 import os
+
+try:
+	from inputimeout import inputimeout
+except:
+	print('inputtimeout not installed')
 
 def check_connection(retry = 5):
 	trys = 1
