@@ -34,7 +34,7 @@ class iobj():
             print(os.path.join(self.ftp.ftpcred["path_web_pibooth"],
                                     'admin', f'conf_web_{self.ftp.ftpcred["boothname"]}.json'))
             self.ftp.ftp_download(os.path.join(self.ftp.ftpcred["path_web_pibooth"],
-                                    'admin', f'conf_web_{self.ftp.ftpcred["boothname"]}.json')),
+                                    'admin', f'conf_web_{self.ftp.ftpcred["boothname"]}.json'),
                                 self.path_cfg_web)
             print('Fichier de configuration téléchargé depuis le web')
         except:
