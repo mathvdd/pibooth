@@ -80,11 +80,11 @@ echo "echo '| wifi                |'" >> /home/boothr/.bashrc
 echo "echo '| start               |'" >> /home/boothr/.bashrc
 echo "echo '| update              |'" >> /home/boothr/.bashrc
 echo "echo '|---------------------|'" >> /home/boothr/.bashrc
-echo "start &" >> /home/boothr/.bashrc
+echo "start" >> /home/boothr/.bashrc
 
 echo 'sftp setup, no need to login, just accept to trust'
 su boothr -c 'sftp -o StrictHostKeyChecking=no ${ftpuser}@${ftphost}'
-echo if do not work, run su boothr -c 'sftp -o StrictHostKeyChecking=no ${ftpuser}@${ftphost}'
+echo if do not work, run su boothr -c 'sftp -o StrictHostKeyChecking=no ftpuser@ftphost' at the end
 
 chmod -w /home/boothr/.bashrc
 chmod -w /home/boothr/.profile

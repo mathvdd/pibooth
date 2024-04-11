@@ -14,6 +14,8 @@ if not os.path.ismount('/USB'):
     sleep(2)
     if not os.path.ismount('/USB'):
         print('mount unsuccessful, suggesting a reboot or checking the USB')
+    else:
+        print('/USB mounted')
 else:
     print('/USB mounted')
 if not os.path.isdir('/USB/im/'):
