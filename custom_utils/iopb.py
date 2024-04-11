@@ -45,7 +45,11 @@ class iobj():
             with open(self.path_cfg_web) as json_file:
                 self.cfg_fromjson = jsonload(json_file)
 
-            print(f'Setting envent to {self.get_event_folder()}')
+            event = self.get_event_folder()
+            print(f'Setting envent to {event}')
+            if not os.path.isdir(f'/USB/im/{event}'):
+                print(f'Building /USB/im/{event}')
+                os.mkdir(f'/USB/im/{event}')
 
             with open(self.path_cfg_local,'r') as f:
                 get_all=f.readlines()
