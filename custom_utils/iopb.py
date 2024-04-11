@@ -27,13 +27,10 @@ class iobj():
 
 
     def fetch_cfg_from_web(self):
-        print(f'conf_web_{self.ftp.ftpcred["boothname"]}.json')
-        print(os.path.join(self.ftp.ftpcred["path_web_pibooth"],
-                                'admin', f'conf_web_{self.ftp.ftpcred["boothname"]}.json'))
         try:
-            print(os.path.join(self.ftp.ftpcred["path_web_pibooth"],
+            print(os.path.join(self.ftp.ftpcred["path_web"],
                                     'admin', f'conf_web_{self.ftp.ftpcred["boothname"]}.json'))
-            self.ftp.ftp_download(os.path.join(self.ftp.ftpcred["path_web_pibooth"],
+            self.ftp.ftp_download(os.path.join(self.ftp.ftpcred["path_web"],
                                     'admin', f'conf_web_{self.ftp.ftpcred["boothname"]}.json'),
                                 self.path_cfg_web)
             print('Fichier de configuration téléchargé depuis le web')
@@ -82,7 +79,7 @@ class iobj():
 
         if alldirs:
             up_local = self.path_im_local_root
-            up_dist = os.path.join(self.ftp.ftpcred["path_web_pibooth"], 'im')
+            up_dist = os.path.join(self.ftp.ftpcred["path_web"], 'im')
             local_list = []
             folders = [os.path.join(path, f) for f in os.listdir(path) if os.path.isdir(f)]
             for folder in folders:
@@ -92,7 +89,7 @@ class iobj():
             event = self.get_event_folder()
             up_local = os.path.join(self.path_im_local_root, event)
             if os.path.isdir(up_local):
-                up_dist = os.path.join(self.ftp.ftpcred["path_web_pibooth"], 'im', event)
+                up_dist = os.path.join(self.ftp.ftpcred["path_web"], 'im', event)
                 local_list = nonrecursive(up_local)
                 dist_list = self.ftp.ftp_listdir(up_dist)
                 to_up = [f for f in local_list if not f in dist_list]

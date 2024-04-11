@@ -38,7 +38,7 @@ echo '{' >> /opt/pibooth/custom_utils/.ftpcred.json
 echo \"host\":\"$ftphost\", >> /opt/pibooth/custom_utils/.ftpcred.json
 echo \"user\":\"$ftpuser\", >> /opt/pibooth/custom_utils/.ftpcred.json
 echo \"pwd\":\"$ftppwd\", >> /opt/pibooth/custom_utils/.ftpcred.json
-echo \"dist\":\"$ftpdist\", >> /opt/pibooth/custom_utils/.ftpcred.json
+echo \"path_web\":\"$ftpdist\", >> /opt/pibooth/custom_utils/.ftpcred.json
 echo \"boothname\":\"$boothname\" >> /opt/pibooth/custom_utils/.ftpcred.json
 echo '}' >> /opt/pibooth/custom_utils/.ftpcred.json
 
