@@ -56,6 +56,7 @@ echo 'USB stuff'
 mkdir /USB
 blkid
 echo 'write USB SSID to copy it into fstab'
+echo 'check carefully that the partition type is good or rpi will boot in emergy mode!'
 read -p "Press enter to continue"
 echo '#USB config' >> /etc/fstab
 echo 'UUID=UUID_HERE /USB vfat defaults,noexec,rw,user,umask=0000 0 0' >> /etc/fstab
@@ -79,12 +80,13 @@ echo "echo '|---------------------|'" >> /home/boothr/.bashrc
 echo "echo '| wifi                |'" >> /home/boothr/.bashrc
 echo "echo '| start               |'" >> /home/boothr/.bashrc
 echo "echo '| update              |'" >> /home/boothr/.bashrc
+echo "echo '| reboot              |'" >> /home/boothr/.bashrc
 echo "echo '|---------------------|'" >> /home/boothr/.bashrc
 echo "start" >> /home/boothr/.bashrc
 
 echo 'sftp setup, no need to login, just accept to trust'
 su boothr -c 'sftp -o StrictHostKeyChecking=no ${ftpuser}@${ftphost}'
-echo if do not work, run su boothr -c 'sftp -o StrictHostKeyChecking=no ftpuser@ftphost' at the end
+echo "if do not work, at the end run su boothr -c 'sftp -o StrictHostKeyChecking=no ftpuser@ftphost'"
 
 chmod -w /home/boothr/.bashrc
 chmod -w /home/boothr/.profile
