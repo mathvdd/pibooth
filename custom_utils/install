@@ -70,6 +70,7 @@ adduser boothr --shell /usr/bin/rbash
 adduser boothr video
 adduser boothr gpio
 adduser boothr input
+adduser boothr netdev
 
 echo "" >> /home/boothr/.bashrc
 echo "PATH='/opt/pibooth/bin/'" >> /home/boothr/.bashrc
