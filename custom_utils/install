@@ -51,6 +51,7 @@ echo 'download python depedencies'
 apt install python3-pandas
 #pip install inputimeout #optional
 pip install pysftp
+pip install qrcode
 
 echo 'USB stuff'
 mkdir /USB
