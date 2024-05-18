@@ -43,6 +43,8 @@ def pibooth_configure(cfg):
     cfg.add_option(SECTION, 'print_location', "bottomright",
                    "Location on 'print' state: {}".format(', '.join(LOCATIONS)),
                    "Location on print screen", LOCATIONS)
+    cfg.add_option(SECTION, 'qr_size', 3,
+                   "Size of each qrcode sub-unit in pixel")
 
 
 def get_qrcode_rect(win_rect, qrcode_image, location, offset):
@@ -139,7 +141,7 @@ def state_processing_exit(cfg, app):
         raise ModuleNotFoundError("No module named 'qrcode'")
     qr = qrcode.QRCode(version=1,
                        error_correction=qrcode.constants.ERROR_CORRECT_L,
-                       box_size=3,
+                       box_size=cfg.get(SECTION, 'qr_size'),
                        border=1)
 
     url_vars = {'picture': app.picture_filename,
